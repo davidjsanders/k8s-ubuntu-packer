@@ -1,0 +1,52 @@
+{
+    "variables": {
+      "client_id": "",
+      "client_secret": "",
+      "tenant_id": "",
+      "subscription_id": "",
+      "IMAGE_RG": "",
+      "IMAGE_NAME": "",
+      "MAJOR_VERSION": "",
+      "MINOR_VERSION": "",
+      "BUILD_NUMBER": "1"
+    },
+    "builders": [{
+      "type": "azure-arm",
+  
+      "client_id": "{{user `client_id`}}",
+      "client_secret": "{{user `client_secret`}}",
+      "tenant_id": "{{user `tenant_id`}}",
+      "subscription_id": "{{user `subscription_id`}}",
+  
+      "managed_image_resource_group_name": "{{user `IMAGE_RG`}}",
+      "managed_image_name": "{{user `IMAGE_NAME`}}-{{user `MAJOR_VERSION`}}-{{user `MINOR_VERSION`}}-{{user `BUILD_NUMBER`}}",
+  
+      "os_type": "Linux",
+      "image_publisher": "Canonical",
+      "image_offer": "UbuntuServer",
+      "image_sku": "18.04-LTS",
+  
+      "azure_tags": {
+          "tag_description": "Ubuntu 18.04 k8s Image",
+          "tag_billing": "Engineering",
+          "tag_environment": "dev"
+      },
+  
+      "location": "East US",
+      "vm_size": "Standard_DS1_v2"
+    }],
+    "provisioners": [{
+      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
+      "inline": [
+          "DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::=\"--force-confold\" -q update",
+          "DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::=\"--force-confold\" -q --yes upgrade",
+          "DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::=\"--force-confold\" -q --yes install software-properties-common jq",
+          "DEBIAN_FRONTEND=noninteractive apt-add-repository --yes ppa:ansible/ansible",
+          "DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::=\"--force-confold\" -q update",
+          "DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::=\"--force-confold\" -q --yes install ansible",
+          "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
+      ],
+      "inline_shebang": "/bin/sh -x",
+      "type": "shell"
+    }]
+  }
