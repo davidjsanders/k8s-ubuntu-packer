@@ -1,0 +1,8 @@
+{
+    "IMAGE_RG": "RG-ENGINEERING",
+    "IMAGE_NAME": "K8S-UBUNTU-ANSIBLE",
+    "MAJOR_VERSION": "20",
+    "MINOR_VERSION": "02",
+    "BUILD_NUMBER": "18.2",
+    "k8s_os_version": "1.16.7-00"
+}

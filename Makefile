@@ -10,6 +10,10 @@ ifndef TARGET
   override TARGET := image.json
 endif
 
+ifndef VARIABLES
+  override VARIABLES := variables.json
+endif
+
 .PHONY: validate
 validate:
 	@start="`date`"; \
@@ -20,7 +24,7 @@ validate:
 		--volume=$(HOME)/.ssh:/ssh \
 		$(IMAGE_NAME) validate \
 			-var-file=/secrets/credentials.secret \
-			-var-file=/data/vars/variables.json \
+			-var-file=/data/vars/$(VARIABLES) \
 			$(TARGET) ; \
 	echo ; \
 	echo "Started validation at  : $$start"; \
@@ -37,7 +41,7 @@ build:
 		--volume=$(HOME)/.ssh:/ssh \
 		$(IMAGE_NAME) build \
 			-var-file=/secrets/credentials.secret \
-			-var-file=/data/vars/variables.json \
+			-var-file=/data/vars/$(VARIABLES) \
 			$(TARGET) ; \
 	echo ; \
 	echo "Started validation at  : $$start"; \
