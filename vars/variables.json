@@ -2,6 +2,6 @@
     "IMAGE_RG": "RG-ENGINEERING",
     "IMAGE_NAME": "K8S-UBUNTU-1804",
     "MAJOR_VERSION": "20",
-    "MINOR_VERSION": "01",
-    "BUILD_NUMBER": "26"
+    "MINOR_VERSION": "02",
+    "BUILD_NUMBER": "24"
 }
