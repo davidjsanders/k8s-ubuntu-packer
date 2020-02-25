@@ -6,4 +6,4 @@ admin="azadmin"
 ansible_ssh_user=azadmin
 ansible_ssh_common_args='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 ansible_python_interpreter=/usr/bin/python3
-os_k8s_version="1.16.7-00"
+os_k8s_version="1.17.1-00"

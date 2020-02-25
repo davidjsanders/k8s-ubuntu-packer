@@ -3,6 +3,6 @@
     "IMAGE_NAME": "K8S-UBUNTU-ANSIBLE",
     "MAJOR_VERSION": "20",
     "MINOR_VERSION": "02",
-    "BUILD_NUMBER": "18.2",
-    "k8s_os_version": "1.16.7-00"
+    "BUILD_NUMBER": "24.1",
+    "k8s_os_version": "1.17.1-00"
 }
